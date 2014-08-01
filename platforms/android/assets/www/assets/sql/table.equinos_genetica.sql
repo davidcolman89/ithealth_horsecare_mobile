@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS equinos_genetica (
+id INTEGER PRIMARY KEY
+, nombre TEXT
+)

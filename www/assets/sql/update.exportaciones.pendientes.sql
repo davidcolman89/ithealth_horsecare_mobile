@@ -1,0 +1,1 @@
+update exportaciones set pendiente = 0 where pendiente = 1

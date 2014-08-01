@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Horse Care</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <link rel="stylesheet" href="assets/css/min/jquery.mobile-1.4.0.min.css"/>
+    <link rel="stylesheet" href="assets/css/index.css"/>
+</head>
+
+<body>
+<div data-role="page" id="presentacion">
+    <figure class="dc-figure-presentacion">
+        <img class="dc-img-footer-presentacion" src="assets/css/images/ithealth_logo-frase.png">
+    </figure>
+</div>
+<div data-role="page" id="login">
+    <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-header-fixed slidedown ui-bar-inherit dc-div-header">
+        <h1>Horse - Care - LogIn</h1>
+    </div>
+    <div data-role="content">
+        <form id="frmLogIn">
+            <div data-role="fieldcontain">
+                <label for="u">Usuario:</label>
+                <input type="text" name="u" id="u" value="" autofocus/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="p">Password:</label>
+                <input type="password" name="p" id="p" value=""/>
+            </div>
+            <p id="pLoginAjxResp"></p>
+            <input type="button" id="btnLogin" class="ui-btn" value="Ingresar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div data-role="page" id="home" class="dc-div-page">
+    <div data-role="header" class="dc-div-header ui-grid-b" style="overflow:hidden;">
+        <h1>Horse - Care</h1>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <!-- /header -->
+    <div data-role="content">
+        <div class="ui-grid-a center">
+            <div class="ui-block-a">
+                <label for="home_id_cliente">Clientes</label><select id="home_id_cliente"></select>
+            </div>
+            <div class="ui-block-b">
+                <label for="home_id_equino">Equinos</label><select id="home_id_equino"></select>
+            </div>
+        </div>
+        <div id="home-online" class="div-online">
+            <a href="#pag_altas" data-role="button" class="dc-a-btn">Altas</a>
+            <a href="#pag_ver_ultimos" data-role="button" id="btnVerUltEquinos" class="dc-a-btn">&Uacute;ltimos Equinos</a>
+            <a href="#pag_ver_clientes" data-role="button" id="btnVerClientes" class="dc-a-btn">Clientes</a>
+            <!--
+            <a href="#pag_informes" data-role="button" id="btnInformes" >Informes</a>
+            -->
+            <a href="#pag_ver_estudios_pendientes" data-role="button" id="btn-estudios-list-pendientes" class="dc-a-btn">Estudios</a>
+            <hr class="dc-hr">
+            <a href="#" id="btnImpInfServer" data-role="button" class="dc-a-btn-import">Importar</a>
+            <a href="#" id="btn-exportar-offline" data-role="button" class="dc-a-btn-export">Exportar</a>
+            <div id="div-export-online-msj"></div>
+            <div id="div-export-offline-msj"></div>
+        </div>
+        <div id="home-offline" class="div-offline">
+            <a href="#pag_altas_offline" data-role="button" class="dc-a-btn">Altas</a>
+        </div>
+
+        <!---->
+        <!--<div id="divAjxLoading" class="divAjxLoading">-->
+            <!--<img src="assets/css/images/ajax-loader.gif"> Importando...-->
+        <!--</div>-->
+
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<!--********************************************* MODO ONLINE *********************************************-->
+<div class="div-online" data-role="page" id="pag_altas">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Altas</h1>
+        <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <div data-role="content">
+        <a href="#pag_altas_cliente" id="btnAltaCliente" data-role="button" class="dc-a-btn">Clientes</a>
+        <a href="#pag_altas_equino" id="btnAltaEquino" data-role="button" class="dc-a-btn">Equinos</a>
+        <a href="#pag_altas_genetica" id="btnAltaGenetica" data-role="button" class="dc-a-btn">Genetica</a>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_ver_clientes">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Clientes</h1><a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <div data-role="content">
+        <form onsubmit="return false;">
+            <input id="filterTable-input-list-clientes" data-type="search">
+        </form>
+        <table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"
+               data-input="#filterTable-input-list-clientes">
+            <thead>
+            <tr class="ui-bar-a">
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody id="tableClientesTbody"></tbody>
+        </table>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_ver_ultimos">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Ultimos Atendidos</h1><a href="#home" data-icon="back" class="ui-btn-left">Volver</a><a
+            href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right">Logout</a>
+    </div>
+
+    <div data-role="content">
+
+        <form onsubmit="return false;">
+            <input id="filterTable-input-list-ult-equinos" data-type="search">
+        </form>
+
+        <table data-role="table" id="tableUltEquinos" data-mode=""
+               class="ui-body-a ui-shadow table-stripe ui-responsive"
+               data-filter="true"
+               data-input="#filterTable-input-list-ult-equinos">
+            <thead>
+            <tr class="ui-bar-a">
+                <th colspan="4"><a href="#" id="aVerTodosEquinos" data-ie=""
+                                   class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a></th>
+            </tr>
+            <tr class="ui-bar-a">
+                <th>Equino</th>
+                <th>Due&ntilde;o</th>
+                <th>Observación</th>
+                <th>Problema</th>
+            </tr>
+            </thead>
+            <tbody id="tableUltEquinosTbody"></tbody>
+        </table>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_ver_equino">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Equino</h1>
+        <a href="#pag_ver_ultimos" data-icon="back" class="ui-btn-left btnVerUltEquinos">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <table data-role="table" id="tableEquinoData" data-mode=""
+               class="ui-body-a ui-shadow ui-responsive table-stripe">
+            <thead></thead>
+            <tbody id="tableEquinoDataTbody"></tbody>
+        </table>
+        <br/>
+
+        <form onsubmit="return false;">
+            <input id="filterTable-input-list-prob" data-type="search">
+        </form>
+
+        <table data-role="table" id="tableEquinoProb" data-mode=""
+               class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"
+               data-input="#filterTable-input-list-prob">
+            <thead>
+                <tr class="ui-bar-a">
+                    <th >Problemas</th>
+                    <th>
+                        <a href="#" id="aInfEqVerProbs" data-ie=""
+                           class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a>
+                    </th>
+                    <th id="thInfEqAltaProb">
+                        <a href="#pag_altas_problema" id="aInfEqAltaProb" data-ie=""
+                           class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all aAltaProb aEqAltaProb aLink"></a>
+                    </th>
+                </tr>
+                <tr class="ui-bar-a">
+                    <th>Info</th>
+                    <th colspan="2">Evoluciones</th>
+                </tr>
+            </thead>
+            <tbody id="tableEquinoProbTbody"></tbody>
+        </table>
+        <br>
+        <div id="divListEvol"></div>
+        <hr class="dc-hr">
+        <div id="div-img-estudio">
+            <span><a href="#" id="btn-close-info-estudio" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext">Close</a></span>
+            <br>
+            <table data-role="table" id="table-info-estudio" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" >
+                <tbody id="tbody-info-estudio">
+                <tr>
+                    <th>
+                        Estudios - Imágenes
+                    </th>
+                </tr>
+                <tr>
+                    <a href="#div-popup-img-estudio" data-rel="popup" data-position-to="window" class="">
+                        <img id="img-estudio" src="" alt="" style="width:10%">
+                    </a>
+                </tr>
+                <tr>
+                    <th>
+                        Nombre Doctor
+                    </th>
+                </tr>
+                <tr>
+                    <td id="div-estudio-doctor-nombre"></td>
+                </tr>
+                <tr>
+                    <th>
+                        Obs
+                    </th>
+                </tr>
+                <tr>
+                    <td id="div-estudio-obs" style="word-break: break-all !important;"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div data-role="popup" id="div-popup-img-estudio" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <img id="img-estudio-popup" src="" >
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_informes">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Informes</h1>
+        <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <div data-role="content"></div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_ver_estudios_pendientes">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Estudios Pendientes</h1>
+        <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <div data-role="content">
+        <form onsubmit="return false;">
+            <input id="filterTable-input-tot" data-type="search">
+        </form>
+
+        <table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive"
+               data-filter="true"
+               data-input="#filterTable-input-tot">
+            <thead>
+            <tr class="ui-bar-a">
+                <th colspan="4">Estudios Pendientes</th>
+            </tr>
+            <tr class="ui-bar-a">
+                <th>Equino</th>
+                <th>Estudio</th>
+                <th>Fecha</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tbody-estudios-tot"></tbody>
+        </table>
+
+        <!--<form onsubmit="return false;">-->
+            <!--<input id="filterTable-input-prob" data-type="search">-->
+        <!--</form>-->
+        <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
+               <!--data-input="#filterTable-input-prob">-->
+            <!--<thead>-->
+            <!--<tr class="ui-bar-a">-->
+                <!--<th colspan="3">Problemas</th>-->
+            <!--</tr>-->
+            <!--<tr class="ui-bar-a">-->
+                <!--<th>equino</th>-->
+                <!--<th>tipo estudio</th>-->
+                <!--<th></th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="tbody-estudios-problemas"></tbody>-->
+        <!--</table>-->
+        <!--<hr>-->
+        <!--<form onsubmit="return false;">-->
+            <!--<input id="filterTable-input-evol" data-type="search">-->
+        <!--</form>-->
+        <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
+               <!--data-input="#filterTable-input-evol">-->
+            <!--<thead>-->
+            <!--<tr class="ui-bar-a">-->
+                <!--<th colspan="3">Evoluciones</th>-->
+            <!--</tr>-->
+            <!--<tr class="ui-bar-a">-->
+                <!--<th>equino</th>-->
+                <!--<th>tipo estudio</th>-->
+                <!--<th></th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="tbody-estudios-evoluciones">-->
+            <!--</tbody>-->
+        <!--</table>-->
+        <!--<hr>-->
+
+
+        <div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false"
+             data-tolerance="30,15">
+            <a href="#" data-rel="back"
+               class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <img src="" alt="Photo portrait">
+        </div>
+
+
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_cliente">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Cliente</h1>
+        <a href="#pag_altas" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmAltaCliente">
+            <div data-role="fieldcontain">
+                <label for="alt_cli_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="alt_cli_nombre" value=""/>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_direccion">
+                <label for="alt_cli_direccion">Direcci&oacute;n:</label>
+                <input type="text" name="direccion" id="alt_cli_direccion" value=""/>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_id_provincia">
+                <label for="alt_cli_id_provincia" class="select">Provincia:</label>
+                <select name="id_provincia" id="alt_cli_id_provincia">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_id_localidad">
+                <label for="alt_cli_id_localidad" class="select">Localidad:</label>
+                <select name="id_localidad" id="alt_cli_id_localidad">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_telefono">
+                <label for="alt_cli_telefono">Telefono:</label>
+                <input type="text" name="telefono" id="alt_cli_telefono" value=""/>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_celular">
+                <label for="alt_cli_celular">Celular:</label>
+                <input type="text" name="celular" id="alt_cli_celular" value=""/>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_cli_email">
+                <label for="alt_cli_email">Email:</label>
+                <input type="text" name="email" id="alt_cli_email" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_cli_id_lugar">Lugar por defecto:</label>
+                <select name="id_lugar" id="alt_cli_id_lugar"></select>
+            </div>
+            <p id="pCliAjxResp"></p>
+            <input type="button" id="btnGuardarCliente" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_equino">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Equino</h1>
+        <a href="#pag_altas" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmAltaEquino">
+            <div data-role="fieldcontain">
+                <label for="alt_eq_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="alt_eq_nombre" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_eq_id_duenio">Due&ntilde;o:</label>
+                <select name="id_duenio" id="alt_eq_id_duenio"></select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_id_sexo">
+                <label for="alt_eq_id_sexo" class="select">Sexo:</label>
+                <select name="id_sexo" id="alt_eq_id_sexo"></select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_nacimiento">
+                <label for="alt_eq_nacimiento">Nacimiento:</label>
+                <input type="date" id="alt_eq_nacimiento" name="nacimiento">
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_id_padrillo">
+                <label for="alt_eq_id_padrillo">Padrillo:</label>
+                <select name="id_padrillo" id="alt_eq_id_padrillo"></select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_id_madre">
+                <label for="alt_eq_id_madre">Madre:</label>
+                <select name="id_madre" id="alt_eq_id_madre"></select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_id_abuelo">
+                <label for="alt_eq_id_abuelo">Abuelo:</label>
+                <select name="id_abuelo" id="alt_eq_id_abuelo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_eq_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="alt_eq_obs"></textarea>
+            </div>
+            <p id="pEquinoAjxResp"></p>
+            <input type="button" id="btnGuardarEquino" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_genetica">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Genetica</h1>
+        <a href="#pag_altas" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmAltaGenetica">
+            <div data-role="fieldcontain">
+                <label for="gen_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="gen_nombre" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="gen_obs">Observaci&oacute;n:</label> <textarea cols="40" rows="8" name="obs"
+                                                                           id="gen_obs"></textarea>
+            </div>
+            <p id="pEquinoGenAjxResp"></p>
+            <input type="button" id="btnGuardarGenetica" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_problema">
+    <div  data-role="header" class="dc-div-header" style="overflow:hidden;" id="divAltaProbHeader">
+        <h1>Horse - Care - Alta Problema</h1>
+        <a href="#pag_ver_equino" id="btnAltaProbBack" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmAltaEquinoProblema">
+            <div data-role="fieldcontain">
+                <label for="prob_fecha">Fecha:</label>
+                <input type="date" name="fecha" id="prob_fecha">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_lugar">Lugar:</label>
+                <select name="id_lugar" id="prob_id_lugar"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_dolencia">Dolencia:</label>
+                <select name="id_dolencia" id="prob_id_dolencia"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_estado">Resultado Evolucion:</label>
+                <select name="id_estado" id="prob_id_estado"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="prob_obs"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_estudio_tipo">Estudio:</label>
+                <select name="id_estudio_tipo" id="prob_id_estudio_tipo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_medicacion">Medicacion:</label><select name="id_medicacion"
+                                                                           id="prob_id_medicacion"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_practica">Practica:</label><select name="id_practica"
+                                                                       id="prob_id_practica"></select>
+            </div>
+            <input type="hidden" name="inptHideIE" id="inptHideIE" value="">
+
+            <p id="pEquinoProblemaAjxResp"></p>
+            <input type="button" id="btnGuardarProblema" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_evolucion">
+    <div  data-role="header" class="dc-div-header" style="overflow:hidden;" id="divAltaEvolHeader">
+        <h1>Horse - Care - Alta Evoluci&oacute;n</h1>
+        <a href="#pag_ver_equino" id="btnAltaEvolBack" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmAltProbEvol">
+            <div data-role="fieldcontain">
+                <label for="evol_fecha">Fecha:</label>
+                <input type="date" name="fecha" id="evol_fecha">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_lugar">Lugar:</label><select name="id_lugar" id="evol_id_lugar"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_estado">Resultado Evolucion:</label><select name="id_estado"
+                                                                                id="evol_id_estado"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_obs">Observaci&oacute;n:</label><textarea cols="40" rows="8" name="obs"
+                                                                           id="evol_obs"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_estudio_tipo">Estudio:</label><select name="id_estudio_tipo"
+                                                                          id="evol_id_estudio_tipo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_medicacion">Medicacion:</label><select name="id_medicacion"
+                                                                           id="evol_id_medicacion"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_practica">Practica:</label><select name="id_practica"
+                                                                       id="evol_id_practica"></select>
+            </div>
+            <input type="hidden" name="inptHideIP" id="inptHideIP" value="">
+
+            <p id="pProbEvolAjxResp"></p>
+            <input type="button" id="btnGuardarEvolucion" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_altas_estudios_archivos">
+    <div  data-role="header" class="dc-div-header" style="overflow:hidden;" id="divAltaEstudioArchivoHeader">
+        <h1>Horse - Care - Estudio - Subir Archivo</h1>
+        <a href="#pag_ver_equino" id="btn-alta-estudio-archivo-back" data-icon="back" class="ui-btn-left"
+           data-ie="">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+
+    </div>
+    <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+
+    <div data-role="content">
+        <form id="frmAltaEstudioArchivo">
+            <div data-role="fieldcontain">
+                <label for="estarch_equino">Equino:</label>
+                <p id="estarch_equino"></p>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="estarch_tipo_estudio">Tipo de Estudio:</label>
+                <p id="estarch_tipo_estudio"></p>
+            </div>
+            <!--
+            <div data-role="fieldcontain">
+                <label for="estarch_archivo">Archivo:</label>
+                <input type="file" data-clear-btn="true" name="estarch_archivo" id="estarch_archivo" value="">
+            </div>
+            -->
+            <div data-role="fieldcontain">
+                <label for="estarch_doctor_nombre">Nombre Doctor:</label>
+                <input type="text" name="doctor_nombre" id="estarch_doctor_nombre">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="estarch_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="estarch_obs"></textarea>
+            </div>
+            <input type="hidden" name="inpt-hide-id_estudio" id="inpt-hide-id_estudio" value="">
+
+        </form>
+        <p id="pEquinoEstudioArchivoAjxResp"></p>
+        <input type="button" id="btnGuardarArchivo" class="ui-btn" value="Subir Archivo">
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_modifi_cliente">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Modificación Cliente</h1>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmModifiCliente">
+            <div data-role="fieldcontain">
+                <label for="mod_cli_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="mod_cli_nombre" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_direccion">Direcci&oacute;n:</label>
+                <input type="text" name="direccion" id="mod_cli_direccion" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_id_provincia" class="select">Provincia:</label>
+                <select name="id_provincia" id="mod_cli_id_provincia">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_id_localidad" class="select">Localidad:</label>
+                <select name="id_localidad" id="mod_cli_id_localidad">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_telefono">Telefono:</label>
+                <input type="text" name="telefono" id="mod_cli_telefono" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_celular">Celular:</label>
+                <input type="text" name="celular" id="mod_cli_celular" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_email">Email:</label>
+                <input type="text" name="email" id="mod_cli_email" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_cli_id_lugar">Lugar por defecto:</label><select name="id_lugar"
+                                                                                id="mod_cli_id_lugar"></select>
+            </div>
+            <input type="hidden" id="inptModHideIC" name="inptModHideIC" value="">
+
+            <p id="pModCliAjxResp"></p>
+            <input type="button" id="mod_btnGuardarCliente" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-online" data-role="page" id="pag_modifi_equino">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Modificacion Equino</h1>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frmModifiEquino">
+            <div data-role="fieldcontain">
+                <label for="mod_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="mod_nombre" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_id_duenio">Due&ntilde;o:</label><select name="id_duenio" id="mod_id_duenio"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_id_sexo" class="select">Sexo:</label><select name="id_sexo" id="mod_id_sexo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_nacimiento">Nacimiento:</label>
+                <input type="date" id="mod_nacimiento" name="nacimiento">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_id_padrillo">Padrillo:</label><select name="id_padrillo" id="mod_id_padrillo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_id_madre">Madre:</label><select name="id_madre" id="mod_id_madre"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_id_abuelo">Abuelo:</label><select name="id_abuelo" id="mod_id_abuelo"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="mod_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="mod_obs"></textarea>
+            </div>
+            <input type="hidden" id="inptModHideIE" name="inptModHideIE" value="">
+
+            <p id="pModEquinoAjxResp"></p>
+            <input type="button" id="mod_btnGuardarEquino" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<!--********************************************* MODO OFFLINE *********************************************-->
+<div class="div-offline" data-role="page" id="pag_altas_offline">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Altas</h1>
+        <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+    </div>
+    <div data-role="content">
+        <a href="#pag_altas_cliente_offline" id="btn-alta-cliente-offline" data-role="button" class="dc-a-btn">Clientes</a>
+        <a href="#pag_altas_equino_offline" id="btn-alta-equino-offline" data-role="button" class="dc-a-btn">Equinos</a>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-offline" data-role="page" id="pag_altas_cliente_offline"  >
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Cliente</h1>
+        <a href="#pag_altas_offline" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frm-alta-cli-offline">
+            <div data-role="fieldcontain">
+                <label for="alt_cli_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="alt_cli_nombre-offline" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_cli_id_lugar">Lugar por defecto:</label>
+                <select name="id_lugar" id="alt_cli_id_lugar-offline"></select>
+            </div>
+            <p id="pCliAjxResp-offline"></p>
+            <input type="button" id="btn-guardar-cli-offline" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-offline" data-role="page" id="pag_altas_equino_offline">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Equino</h1>
+        <a href="#pag_altas_offline" data-icon="back" class="ui-btn-left">Volver</a><a
+            href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right">Logout</a>
+
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frm-alta-eq-offline">
+            <div data-role="fieldcontain">
+                <label for="alt_eq_nombre">Nombre:</label>
+                <input type="text" name="nombre" id="alt_eq_nombre-offline" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_eq_id_duenio">Due&ntilde;o:</label>
+                <select name="id_duenio" id="alt_eq_id_duenio-offline"></select>
+            </div>
+            <div data-role="fieldcontain" id="div_alt_eq_nacimiento-offline">
+                <label for="alt_eq_nacimiento">Nacimiento:</label>
+                <input type="date" id="alt_eq_nacimiento-offline" name="nacimiento">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="alt_eq_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="alt_eq_obs-offline"></textarea>
+            </div>
+            <p id="pEquinoAjxResp-offline"></p>
+            <input type="button" id="btn-guardar-eq-offline" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-offline" data-role="page" id="pag_ver_equino_offline">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Equino</h1>
+        <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <table data-role="table" id="" data-mode=""
+               class="ui-body-a ui-shadow ui-responsive table-stripe">
+            <thead></thead>
+            <tbody id="tbody-eq-data-offline"></tbody>
+        </table>
+        <br/>
+        <table data-role="table" id="table-eq-prob-offline" data-mode=""
+               class="ui-body-a ui-shadow table-stripe ui-responsive">
+            <thead>
+            <tr class="ui-bar-a">
+                <th colspan="3">Problemas</th>
+                <th>
+                    <a href="#" id="a-list-probs-offline" data-ie="" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a>
+                </th>
+                <th id="th-prob-alta-offline">
+                    <a href="#pag_altas_problema_offline" id="a-alta-prob-offline" data-ie="" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all aLink a-alta-prob"></a>
+                </th>
+            </tr>
+            <tr class="ui-bar-a">
+                <th>#</th>
+                <th>Estudio</th>
+                <th>Info</th>
+                <th colspan="2">Evoluciones</th>
+            </tr>
+            </thead>
+            <tbody id="tbody-prob-offline"></tbody>
+        </table>
+        <div id="div-list-evols">
+            <table data-role="table" id="table-eq-evols-offline" data-mode=""
+                   class="ui-body-a ui-shadow table-stripe ui-responsive">
+                <thead>
+                <tr class="ui-bar-a">
+                    <th colspan="3">Evoluciones</th>
+                </tr>
+                <tr class="ui-bar-a">
+                    <th>#Prob</th>
+                    <th>Estudio</th>
+                    <th colspan="2">Info</th>
+                </tr>
+                </thead>
+                <tbody id="tbody-evols-offline"></tbody>
+            </table>
+        </div>
+        <input type="hidden" id="vista-eq-id" value="">
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-offline" data-role="page" id="pag_altas_problema_offline">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Problema</h1>
+        <a href="#pag_ver_equino_offline" id="btn-back-alta-prob-offline" data-icon="back" class="ui-btn-left" data-ie="">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frm-alta-prob-offline">
+            <div data-role="fieldcontain">
+                <label for="prob_fecha-offline">Fecha:</label>
+                <input type="date" name="fecha" id="prob_fecha-offline">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_lugar-offline">Lugar:</label>
+                <select name="id_lugar" id="prob_id_lugar-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_dolencia-offline">Dolencia:</label>
+                <select name="id_dolencia" id="prob_id_dolencia-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_estado-offline">Resultado Evolucion:</label>
+                <select name="id_estado" id="prob_id_estado-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_obs-offline">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="prob_obs-offline"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_estudio_tipo-offline">Estudio:</label>
+                <select name="id_estudio_tipo" id="prob_id_estudio_tipo-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_medicacion-offline">Medicacion:</label>
+                <select name="id_medicacion" id="prob_id_medicacion-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="prob_id_practica-offline">Practica:</label>
+                <select name="id_practica" id="prob_id_practica-offline"></select>
+            </div>
+            <input type="hidden" name="inpt-hide-ie-offline" id="inpt-hide-ie-offline" value="">
+            <p id="p-prob-resp-offline"></p>
+            <input type="button" id="btn-guardar-prob-offline" class="ui-btn" value="Guardar">
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+<div class="div-offline" data-role="page" id="pag_altas_evolucion_offline">
+    <div data-role="header" class="dc-div-header" style="overflow:hidden;">
+        <h1>Horse - Care - Alta Evoluci&oacute;n</h1>
+        <a href="#" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
+        <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
+
+        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    <div data-role="content">
+        <form id="frm-evol-alta-offline">
+            <div data-role="fieldcontain">
+                <label for="evol_fecha">Fecha:</label>
+                <input type="date" name="fecha" id="evol_fecha-offline">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_lugar">Lugar:</label>
+                <select name="id_lugar" id="evol_id_lugar-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_estado">Resultado Evolucion:</label>
+                <select name="id_estado" id="evol_id_estado-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_obs">Observaci&oacute;n:</label>
+                <textarea cols="40" rows="8" name="obs" id="evol_obs-offline"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_estudio_tipo">Estudio:</label>
+                <select name="id_estudio_tipo" id="evol_id_estudio_tipo-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_medicacion">Medicacion:</label>
+                <select name="id_medicacion" id="evol_id_medicacion-offline"></select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="evol_id_practica">Practica:</label>
+                <select name="id_practica" id="evol_id_practica-offline"></select>
+            </div>
+
+            <input type="hidden" name="inpt-hide-ip-offline" id="inpt-hide-ip-offline" value="">
+            <p id="p-evol-resp-offline"></p>
+            <input type="button" id="btn-guardar-evol-offline" class="ui-btn" value="Guardar">
+
+        </form>
+    </div>
+    <div data-role="footer" class="dc-div-footer" data-position="fixed">
+        <figure class="dc-figure">
+            <img class="dc-img-footer" src="assets/css/images/ithealth_logo-frase.png">
+        </figure>
+    </div>
+</div>
+
+<script src="assets/js/lib/min/jquery-1.10.2.min.js"></script>
+<script src="assets/js/lib/min/jquery.mobile-1.4.0.min.js"></script>
+<script src="assets/js/lib/min/modernizr.min.js"></script>
+<script src="assets/js/lib/min/utf8_encode.min.js"></script>
+<script src="assets/js/lib/min/utf8_decode.min.js"></script>
+<script src="assets/js/lib/min/md5.min.js"></script>
+<script src="assets/js/lib/min/date.min.js"></script>
+<script src="assets/js/lib/min/empty.min.js"></script>
+
+<script src="assets/js/config.js"></script>
+
+<script src="assets/js/funciones.js"></script>
+<script src="assets/js/funciones.db.js"></script>
+<script src="assets/js/funciones.importacion.js"></script>
+<script src="assets/js/funciones.exportacion.js"></script>
+<script src="assets/js/funciones.armar.html.js"></script>
+<script src="assets/js/funciones.armar.html.combos.js"></script>
+<script src="assets/js/funciones.online.js"></script>
+<script src="assets/js/funciones.offline.js"></script>
+
+<script src="assets/js/combos.carga.ajax.js"></script>
+<script src="assets/js/combos.carga.json.js"></script>
+<script src="assets/js/combos.change.js"></script>
+
+<script src="assets/js/index.offline.js"></script>
+<script src="assets/js/index.online.js"></script>
+
+<script src="assets/js/index.js"></script>
+</body>
+</html>

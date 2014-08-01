@@ -1,0 +1,1 @@
+INSERT INTO usuarios (nombre,apellido,usuario,password) VALUES (?,?,?,?)

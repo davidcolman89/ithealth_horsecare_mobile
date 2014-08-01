@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY,nombre TEXT ,apellido TEXT, usuario TEXT,password TEXT)

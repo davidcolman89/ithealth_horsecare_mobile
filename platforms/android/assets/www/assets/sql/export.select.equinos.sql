@@ -1,0 +1,1 @@
+SELECT * FROM equinos WHERE equinos.offline = 1

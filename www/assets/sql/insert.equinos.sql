@@ -1,0 +1,1 @@
+INSERT INTO equinos (id, nombre, id_duenio, nacimiento, obs, offline, fecha_creacion) VALUES (?,?,?,?,?,?,?)

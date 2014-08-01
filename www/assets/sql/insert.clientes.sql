@@ -1,0 +1,1 @@
+INSERT INTO clientes (id, nombre, id_lugar, offline, fecha_creacion ) VALUES (?,?,?,?,?)

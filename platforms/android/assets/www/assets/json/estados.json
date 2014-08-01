@@ -1,0 +1,28 @@
+[
+
+    {
+        "id": 1,
+        "estado": "problema activo",
+        "id_estado_tipo": 1
+    },
+    {
+        "id": 2,
+        "estado": "problema pasivo - alta medica",
+        "id_estado_tipo": 1
+    },
+    {
+        "id": 3,
+        "estado": "obito",
+        "id_estado_tipo": 1
+    },
+    {
+        "id": 4,
+        "estado": "archivo pendiente",
+        "id_estado_tipo": 2
+    },
+    {
+        "id": 5,
+        "estado": "archivo subido",
+        "id_estado_tipo": 2
+    }
+]

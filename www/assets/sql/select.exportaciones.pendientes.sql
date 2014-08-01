@@ -1,0 +1,1 @@
+select json,tipo from exportaciones where pendiente=1

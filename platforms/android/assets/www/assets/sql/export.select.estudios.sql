@@ -1,0 +1,1 @@
+SELECT * FROM estudios WHERE offline = 1

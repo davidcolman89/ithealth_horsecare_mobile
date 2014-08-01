@@ -1,0 +1,1 @@
+SELECT * FROM evoluciones WHERE offline = 1

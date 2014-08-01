@@ -1,0 +1,1 @@
+INSERT INTO practicas ( id_evolucion, id_practica_tipo, offline, fecha_creacion) VALUES (?,?,?,?)

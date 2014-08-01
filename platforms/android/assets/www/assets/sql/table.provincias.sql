@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS provincias (id INTEGER PRIMARY KEY ,descripcion)

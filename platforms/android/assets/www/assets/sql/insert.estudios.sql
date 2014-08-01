@@ -1,0 +1,1 @@
+INSERT INTO estudios ( id_evolucion, id_estudio_tipo, offline, fecha_creacion) VALUES (?,?,?,?)

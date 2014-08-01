@@ -1,0 +1,17 @@
+[
+    {
+        "value": 1,
+        "text": "problema activo",
+        "id_estado_tipo": 1
+    },
+    {
+        "value": 2,
+        "text": "problema pasivo - alta medica",
+        "id_estado_tipo": 1
+    },
+    {
+        "value": 3,
+        "text": "obito",
+        "id_estado_tipo": 1
+    }
+]

@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS exportaciones (id INTEGER PRIMARY KEY, fecha_creacion TEXT,json TEXT ,tipo TEXT, pendiente INTEGER DEFAULT 1)

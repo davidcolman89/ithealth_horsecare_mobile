@@ -1,0 +1,1 @@
+SELECT usuarios.id FROM usuarios WHERE usuarios.usuario=? AND usuarios.password=?

@@ -1,0 +1,1 @@
+INSERT INTO medicaciones ( id_evolucion, id_medicacion_tipo, offline, fecha_creacion) VALUES (?,?,?,?)

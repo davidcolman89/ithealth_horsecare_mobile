@@ -1,0 +1,1 @@
+INSERT INTO exportaciones (fecha_creacion, json, tipo) VALUES (?,?,?)

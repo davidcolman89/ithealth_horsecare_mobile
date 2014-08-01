@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "admin",
+        "apellido": "admin",
+        "usuario": "admin",
+        "password": "21232f297a57a5a743894a0e4a801fc3"
+    }
+    ,
+    {
+        "id": 2,
+        "nombre": "david",
+        "apellido": "colman",
+        "usuario": "d",
+        "password": "c4ca4238a0b923820dcc509a6f75849b"
+    }
+]
