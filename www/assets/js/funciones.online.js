@@ -46,10 +46,10 @@ function armarTrEstudioPendiente(obj){
         '<a',
         ' href="#" ',
         ' class="a-alta-est-archivos ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all " ',
-        ' data-id="'+ idEstudio +'" ',
-        ' data-ie="'+ idEquino +'" ',
-        ' data-nom-equino="'+ equinoNombre +'" ',
-        ' data-tipo-estudio="'+ estudioTipo +'" ',
+            ' data-id="'+ idEstudio +'" ',
+            ' data-ie="'+ idEquino +'" ',
+            ' data-nom-equino="'+ equinoNombre +'" ',
+            ' data-tipo-estudio="'+ estudioTipo +'" ',
         '>',
         '>>',
         '</a>'
@@ -76,6 +76,8 @@ function limpiarInfoEstudio(e) {
 
 function cargarListadoEstudiosPendientes(cb) {
 
+    $("#div-estudiospendientes-ajax-loading").show();
+
     $.ajax({
         type: "POST",
         url: sHost + "ajx.list.estudios.php",
@@ -87,6 +89,8 @@ function cargarListadoEstudiosPendientes(cb) {
             if(!empty(cb)){
                 cb();
             }
+
+            $("#div-estudiospendientes-ajax-loading").hide();
         }
     });
 }
@@ -98,54 +102,5 @@ function setOptionSelected(idSelect,value)
     $(sSelector).prop('selected', true);
     $(idSelect).selectmenu();
     $(idSelect).selectmenu('refresh');
-
-}
-
-/**
- * MODULO CARGA DE IMAGENES
- */
-
-function uploadPhoto(imageURI,params) {
-
-    var options = new FileUploadOptions();
-    options.fileKey="file";
-    options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-    options.mimeType="image/jpeg";
-
-    options.params = params;
-
-    var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI(urlUploadImage), win, fail, options);
-
-}
-
-function win(r) {
-
-    var text;
-    var sIdFrm = "#frmAltaEstudioArchivo";
-
-    text = "Archivo Subido";
-
-
-    $(sIdFrm).each(function () {
-        this.reset();
-    });
-
-    $("#pEquinoEstudioArchivoAjxResp").text(text).css("color", "#000000").fadeOut(1000).fadeIn(500).fadeOut(5000);
-
-    cargarListadoEstudiosPendientes(function(){
-        $(":mobile-pagecontainer").pagecontainer("change", "#pag_ver_estudios_pendientes", {allowSamePageTransition: true});
-    });
-
-
-}
-
-function fail(error) {
-
-    var text;
-
-    text = "An error has occurred: Code = " + error.code;
-
-    $("#pEquinoEstudioArchivoAjxResp").text(text).css("color", "#cc0000").fadeOut(1000).fadeIn(500).fadeOut(5000);
 
 }

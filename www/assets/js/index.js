@@ -13,7 +13,7 @@ $(function () {
     dbCreacionTablas();
     dbCreacionUsuarios();
 
-    $("#divAjxLoading").hide();
+    $(".div-ajax-loading").hide();
     $("#div-export-offline-msj").hide().html("");
 
     $(".btnLogout").on("click", function () {

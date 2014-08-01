@@ -1,1 +1,1 @@
-DROP TABLE problemas
+DROP TABLE IF EXISTS problemas

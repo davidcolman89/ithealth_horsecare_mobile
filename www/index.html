@@ -4,7 +4,10 @@
     <title>Horse Care</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    -->
+    <!--<link rel="stylesheet" href="assets/css/min/normalize.min.css"/>-->
     <link rel="stylesheet" href="assets/css/min/jquery.mobile-1.4.0.min.css"/>
     <link rel="stylesheet" href="assets/css/index.css"/>
 </head>
@@ -72,11 +75,6 @@
             <a href="#pag_altas_offline" data-role="button" class="dc-a-btn">Altas</a>
         </div>
 
-        <!---->
-        <!--<div id="divAjxLoading" class="divAjxLoading">-->
-            <!--<img src="assets/css/images/ajax-loader.gif"> Importando...-->
-        <!--</div>-->
-
     </div>
     <div data-role="footer" class="dc-div-footer" data-position="fixed">
         <figure class="dc-figure">
@@ -111,6 +109,9 @@
         <form onsubmit="return false;">
             <input id="filterTable-input-list-clientes" data-type="search">
         </form>
+        <div id="div-clientes-ajax-loading" class="div-ajax-loading">
+            <img src="assets/css/images/ajax-loader.gif">
+        </div>
         <table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"
                data-input="#filterTable-input-list-clientes">
             <thead>
@@ -140,15 +141,18 @@
         <form onsubmit="return false;">
             <input id="filterTable-input-list-ult-equinos" data-type="search">
         </form>
-
+        <div id="div-ultequinos-ajax-loading" class="div-ajax-loading">
+            <img src="assets/css/images/ajax-loader.gif"> CARGANDO
+        </div>
         <table data-role="table" id="tableUltEquinos" data-mode=""
                class="ui-body-a ui-shadow table-stripe ui-responsive"
                data-filter="true"
                data-input="#filterTable-input-list-ult-equinos">
             <thead>
             <tr class="ui-bar-a">
-                <th colspan="4"><a href="#" id="aVerTodosEquinos" data-ie=""
-                                   class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a></th>
+                <th colspan="4">
+                    <a href="#" id="aVerTodosEquinos" data-ie="" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a>
+                </th>
             </tr>
             <tr class="ui-bar-a">
                 <th>Equino</th>
@@ -174,6 +178,7 @@
     </div>
     <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
+        <div id="div-equinodata-ajax-loading" class="div-ajax-loading"><img src="assets/css/images/ajax-loader.gif">CARGANDO</div>
         <table data-role="table" id="tableEquinoData" data-mode=""
                class="ui-body-a ui-shadow ui-responsive table-stripe">
             <thead></thead>
@@ -184,26 +189,28 @@
         <form onsubmit="return false;">
             <input id="filterTable-input-list-prob" data-type="search">
         </form>
-
+        <div id="div-problema-ajax-loading" class="div-ajax-loading"><img src="assets/css/images/ajax-loader.gif">CARGANDO</div>
         <table data-role="table" id="tableEquinoProb" data-mode=""
                class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"
                data-input="#filterTable-input-list-prob">
             <thead>
-                <tr class="ui-bar-a">
-                    <th >Problemas</th>
-                    <th>
-                        <a href="#" id="aInfEqVerProbs" data-ie=""
-                           class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a>
-                    </th>
-                    <th id="thInfEqAltaProb">
-                        <a href="#pag_altas_problema" id="aInfEqAltaProb" data-ie=""
-                           class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all aAltaProb aEqAltaProb aLink"></a>
-                    </th>
-                </tr>
-                <tr class="ui-bar-a">
-                    <th>Info</th>
-                    <th colspan="2">Evoluciones</th>
-                </tr>
+            <tr class="ui-bar-a">
+                <th >
+                    Problemas
+                </th>
+                <th>
+                    <a href="#" id="aInfEqVerProbs" data-ie=""
+                       class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all aLink"></a>
+                </th>
+                <th id="thInfEqAltaProb">
+                    <a href="#pag_altas_problema" id="aInfEqAltaProb" data-ie=""
+                       class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all aAltaProb aEqAltaProb aLink"></a>
+                </th>
+            </tr>
+            <tr class="ui-bar-a">
+                <th>Info</th>
+                <th colspan="2">Evoluciones</th>
+            </tr>
             </thead>
             <tbody id="tableEquinoProbTbody"></tbody>
         </table>
@@ -278,6 +285,9 @@
         <form onsubmit="return false;">
             <input id="filterTable-input-tot" data-type="search">
         </form>
+        <div id="div-estudiospendientes-ajax-loading" class="div-ajax-loading">
+            <img src="assets/css/images/ajax-loader.gif"> CARGANDO
+        </div>
 
         <table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive"
                data-filter="true"
@@ -297,40 +307,40 @@
         </table>
 
         <!--<form onsubmit="return false;">-->
-            <!--<input id="filterTable-input-prob" data-type="search">-->
+        <!--<input id="filterTable-input-prob" data-type="search">-->
         <!--</form>-->
         <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
-               <!--data-input="#filterTable-input-prob">-->
-            <!--<thead>-->
-            <!--<tr class="ui-bar-a">-->
-                <!--<th colspan="3">Problemas</th>-->
-            <!--</tr>-->
-            <!--<tr class="ui-bar-a">-->
-                <!--<th>equino</th>-->
-                <!--<th>tipo estudio</th>-->
-                <!--<th></th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody id="tbody-estudios-problemas"></tbody>-->
+        <!--data-input="#filterTable-input-prob">-->
+        <!--<thead>-->
+        <!--<tr class="ui-bar-a">-->
+        <!--<th colspan="3">Problemas</th>-->
+        <!--</tr>-->
+        <!--<tr class="ui-bar-a">-->
+        <!--<th>equino</th>-->
+        <!--<th>tipo estudio</th>-->
+        <!--<th></th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody id="tbody-estudios-problemas"></tbody>-->
         <!--</table>-->
         <!--<hr>-->
         <!--<form onsubmit="return false;">-->
-            <!--<input id="filterTable-input-evol" data-type="search">-->
+        <!--<input id="filterTable-input-evol" data-type="search">-->
         <!--</form>-->
         <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
-               <!--data-input="#filterTable-input-evol">-->
-            <!--<thead>-->
-            <!--<tr class="ui-bar-a">-->
-                <!--<th colspan="3">Evoluciones</th>-->
-            <!--</tr>-->
-            <!--<tr class="ui-bar-a">-->
-                <!--<th>equino</th>-->
-                <!--<th>tipo estudio</th>-->
-                <!--<th></th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody id="tbody-estudios-evoluciones">-->
-            <!--</tbody>-->
+        <!--data-input="#filterTable-input-evol">-->
+        <!--<thead>-->
+        <!--<tr class="ui-bar-a">-->
+        <!--<th colspan="3">Evoluciones</th>-->
+        <!--</tr>-->
+        <!--<tr class="ui-bar-a">-->
+        <!--<th>equino</th>-->
+        <!--<th>tipo estudio</th>-->
+        <!--<th></th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody id="tbody-estudios-evoluciones">-->
+        <!--</tbody>-->
         <!--</table>-->
         <!--<hr>-->
 
@@ -461,7 +471,7 @@
         <h1>Horse - Care - Alta Genetica</h1>
         <a href="#pag_altas" data-icon="back" class="ui-btn-left">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frmAltaGenetica">
             <div data-role="fieldcontain">
@@ -488,7 +498,7 @@
         <a href="#pag_ver_equino" id="btnAltaProbBack" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
 
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frmAltaEquinoProblema">
             <div data-role="fieldcontain">
@@ -540,7 +550,7 @@
         <h1>Horse - Care - Alta Evoluci&oacute;n</h1>
         <a href="#pag_ver_equino" id="btnAltaEvolBack" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frmAltProbEvol">
             <div data-role="fieldcontain">
@@ -602,12 +612,10 @@
                 <label for="estarch_tipo_estudio">Tipo de Estudio:</label>
                 <p id="estarch_tipo_estudio"></p>
             </div>
-            <!--
             <div data-role="fieldcontain">
                 <label for="estarch_archivo">Archivo:</label>
                 <input type="file" data-clear-btn="true" name="estarch_archivo" id="estarch_archivo" value="">
             </div>
-            -->
             <div data-role="fieldcontain">
                 <label for="estarch_doctor_nombre">Nombre Doctor:</label>
                 <input type="text" name="doctor_nombre" id="estarch_doctor_nombre">
@@ -617,10 +625,9 @@
                 <textarea cols="40" rows="8" name="obs" id="estarch_obs"></textarea>
             </div>
             <input type="hidden" name="inpt-hide-id_estudio" id="inpt-hide-id_estudio" value="">
-
         </form>
         <p id="pEquinoEstudioArchivoAjxResp"></p>
-        <input type="button" id="btnGuardarArchivo" class="ui-btn" value="Subir Archivo">
+        <input type="button" id="btnGuardarArchivo" class="ui-btn" value="Guardar">
     </div>
     <div data-role="footer" class="dc-div-footer" data-position="fixed">
         <figure class="dc-figure">
@@ -632,7 +639,7 @@
     <div data-role="header" class="dc-div-header" style="overflow:hidden;">
         <h1>Horse - Care - Modificación Cliente</h1>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frmModifiCliente">
             <div data-role="fieldcontain">
@@ -687,7 +694,7 @@
     <div data-role="header" class="dc-div-header" style="overflow:hidden;">
         <h1>Horse - Care - Modificacion Equino</h1>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frmModifiEquino">
             <div data-role="fieldcontain">
@@ -752,7 +759,7 @@
         <a href="#pag_altas_offline" data-icon="back" class="ui-btn-left">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
 
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frm-alta-cli-offline">
             <div data-role="fieldcontain">
@@ -779,7 +786,7 @@
         <a href="#pag_altas_offline" data-icon="back" class="ui-btn-left">Volver</a><a
             href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right">Logout</a>
 
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frm-alta-eq-offline">
             <div data-role="fieldcontain">
@@ -814,7 +821,7 @@
         <a href="#home" data-icon="back" class="ui-btn-left">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
 
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <table data-role="table" id="" data-mode=""
                class="ui-body-a ui-shadow ui-responsive table-stripe">
@@ -872,7 +879,7 @@
         <h1>Horse - Care - Alta Problema</h1>
         <a href="#pag_ver_equino_offline" id="btn-back-alta-prob-offline" data-icon="back" class="ui-btn-left" data-ie="">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frm-alta-prob-offline">
             <div data-role="fieldcontain">
@@ -924,7 +931,7 @@
         <a href="#" data-icon="back" class="ui-btn-left btnVerEquino" data-ie="">Volver</a>
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
 
-        </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
+    </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
         <form id="frm-evol-alta-offline">
             <div data-role="fieldcontain">
@@ -986,6 +993,7 @@
 <script src="assets/js/funciones.exportacion.js"></script>
 <script src="assets/js/funciones.armar.html.js"></script>
 <script src="assets/js/funciones.armar.html.combos.js"></script>
+<script src="assets/js/funciones.upload.js"></script>
 <script src="assets/js/funciones.online.js"></script>
 <script src="assets/js/funciones.offline.js"></script>
 

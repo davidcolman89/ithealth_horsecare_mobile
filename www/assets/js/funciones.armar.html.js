@@ -182,6 +182,7 @@ function armarTrHeadEvoluciones(json) {
     return sTr;
 }
 
+
 function armarTrEvoluciones(aEvolucion) {
     var sTr = "";
     var sTd;
@@ -192,12 +193,10 @@ function armarTrEvoluciones(aEvolucion) {
         var sObs = (bObs) ? ((['<br>', '"', json.evol_obs, '"']).join("")) : '';
         //var sClassInfoEquino = (['id_estado_', json.evol_id_estado]).join("");
         var sClassInfoEstudio = (['estudio_activo_', json.evol_estudio_activo]).join("");
-        var infoEquino, infoEstudio, infoMedicacion, infoPratica, infoEvolucion;
-        var srcImgEstudio = '';
-        var sClassVerImgEstudio = '';
-        var dataSrc = '';
-        var dataEstudioDoctorNombre = '';
-        var dataEstudioObs = '';
+        var infoEquino, infoEstudio, infoMedicacion, infoPractica, infoEvolucion;
+        var estudios = json.estudios;
+        var medicaciones = json.medicaciones;
+        var practicas = json.practicas;
 
         infoEvolucion = ([""]).join("");
 
@@ -211,47 +210,75 @@ function armarTrEvoluciones(aEvolucion) {
         ]).join("");
 
 
-        if(!empty(json.evol_estudio_tipo)){
+        if(!empty(estudios)){
 
-            if(!empty(json.evol_archivo_nombre)){
+            $.each(estudios,function(k,estudio){
 
-                srcImgEstudio = sPathImage + json.evol_archivo_nombre;
-                sClassVerImgEstudio = 'btn-ver-img-estudio ';
-                dataSrc = ' data-src="' + srcImgEstudio + '"';
-                dataEstudioDoctorNombre = ' data-doctor-nombre="' + json.evol_estudio_doctor_nombre + '"';
-                dataEstudioObs = ' data-obs="' + json.evol_estudio_obs + '"';
+                if(!empty(estudio.archivos))
+                {
 
-            }
+                    var archivos = estudio.archivos;
+                    var srcImgEstudio = '';
+                    var sClassVerImgEstudio = '';
+                    var dataSrc = '';
+                    var dataEstudioDoctorNombre = '';
+                    var dataEstudioObs = '';
+                    var infoArchivo = '';
 
-            infoEstudio = ([
-                '<br>',
-                '<b>Est.</b> ',
-                '<a href="#" ' ,
-                dataSrc,
-                dataEstudioDoctorNombre,
-                dataEstudioObs,
-                ' class="' + sClassVerImgEstudio + sClassInfoEstudio + '" ',
-                '> ',
-                json.evol_estudio_tipo,
-                '</a>',
-            ]).join("");
+                    $.each(archivos,function(k,archivo){
+
+                        srcImgEstudio = sPathImage + archivo.nombre;
+                        sClassVerImgEstudio = 'btn-ver-img-estudio ';
+                        dataSrc = ' data-src="' + srcImgEstudio + '"';
+                        dataEstudioDoctorNombre = ' data-doctor-nombre="' + estudio.doctor + '"';
+                        dataEstudioObs = ' data-obs="' + estudio.observacion + '"';
+
+                        infoArchivo+= ([
+                            '<a href="#" ' ,
+                            dataSrc,
+                            dataEstudioDoctorNombre,
+                            dataEstudioObs,
+                                ' class="' + sClassVerImgEstudio + sClassInfoEstudio + '" ',
+                            '> ',
+                            estudio.descripcion,
+                            '</a>',
+                        ]).join("");
+
+                    });
+
+
+                }
+
+                infoEstudio+= ([
+                    '<br>',
+                    '<b>Est.</b> ',
+                    infoArchivo
+                ]).join("");
+
+            });
 
         }
 
-        if(!empty(json.evol_medicacion)){
-            infoMedicacion = ([
-                '<br>','<span>','<b>Med.</b> ',json.evol_medicacion,'</span>'
-            ]).join("");
+        if(!empty(medicaciones)){
+
+            $.each(medicaciones,function(k,medicacion){
+                infoMedicacion+= ([
+                    '<br>','<span>','<b>Med.</b> ',medicacion.descripcion,'</span>'
+                ]).join("");
+            });
+
         }
 
-        if(!empty(json.evol_practica)){
-            infoPratica = ([
-                '<br>','<span>','<b>Prac.</b> ',json.evol_practica,'</span>'
-            ]).join("");
+        if(!empty(practicas)){
+
+            $.each(practicas,function(k,practica){
+                infoPractica += (['<br>','<span>','<b>Prac.</b> ',practica.descripcion,'</span>']).join("");
+            });
+
         }
 
 
-        sTd = (['<td>', infoEvolucion,infoEquino, infoEstudio, infoMedicacion, infoPratica,  '</td>']).join("");
+        sTd = (['<td>', infoEvolucion,infoEquino, infoEstudio, infoMedicacion, infoPractica,  '</td>']).join("");
 
         sTr += (['<tr>',  sTd, '</tr>']).join("");
 
@@ -259,6 +286,8 @@ function armarTrEvoluciones(aEvolucion) {
 
     return sTr;
 }
+
+
 
 function armarTrClientes(oJson) {
     var sTr, sTd, aEditarCliente;

@@ -3,13 +3,6 @@ var files;
 function online() {
     $(function () {
 
-
-        $("#frmLogIn").submit(function(event){
-            event.preventDefault();
-            return false;
-        });
-
-
         $("#span-estado-app").addClass("dc-estado-online").text("ONLINE");
         $(".div-offline").hide();
         cargarCombosByAjax();
@@ -60,6 +53,9 @@ function online() {
                 ip: iIP
             });
 
+            $("#div-problema-ajax-loading").show();
+            $("#div-img-estudio").hide();
+
             $.ajax({
                 type: "POST",
                 url: sHost + "ajx.info.evoluciones.php",
@@ -73,6 +69,8 @@ function online() {
                         $("#divListEvol").html(oJson.sError);
                     }
 
+                    $("#div-problema-ajax-loading").hide();
+
                 }
             });
         });
@@ -85,6 +83,8 @@ function online() {
                 lp: false
             });
 
+            $('#div-problema-ajax-loading').show();
+
             $.ajax({
                 type: "POST",
                 url: sHost + "ajx.info.equino.php",
@@ -95,6 +95,7 @@ function online() {
                     $("#tableEquinoProbTbody").html(armarTrEquinoProb(oJson));
                     //Limpiar lista de evoluciones
                     $("#divListEvol").html("");
+                    $('#div-problema-ajax-loading').hide();
 
                 }
             });
@@ -110,7 +111,10 @@ function online() {
         $(aux).delegate(".aVerEquino,.btnVerEquino", "click", function () {
             var idEquino;
             idEquino = $(this).attr("data-ie");
-            verEquino(idEquino);
+
+            verEquino(idEquino,function(){
+                $(":mobile-pagecontainer").pagecontainer("change", "#pag_ver_equino", {allowSamePageTransition: true});
+            });
         });
 
         $("#btnVerUltEquinos,.btnVerUltEquinos").on("click", function () {
@@ -128,6 +132,8 @@ function online() {
 
         $("#aVerTodosEquinos").on("click", function () {
 
+            $("#div-ultequinos-ajax-loading").show();
+
             $.ajax({
                 type: "POST",
                 url: sHost + "ajx.list.equinos.php",
@@ -135,11 +141,15 @@ function online() {
                 success: function (sRespuesta) {
                     var oJson = $.parseJSON(sRespuesta);
                     $("#tableUltEquinosTbody").html(armarTrEquinos(oJson));
+                    $("#div-ultequinos-ajax-loading").hide();
                 }
             });
         });
 
         $("#btnVerClientes,.btnVerClientes").on("click", function () {
+
+            $('#div-clientes-ajax-loading').show();
+            $("#tableClientesTbody").html('');
 
             $.ajax({
                 type: "POST",
@@ -148,8 +158,10 @@ function online() {
                 success: function (sRespuesta) {
                     var oJson = $.parseJSON(sRespuesta);
                     $("#tableClientesTbody").html(armarTrClientes(oJson));
+                    $('#div-clientes-ajax-loading').hide();
                 }
             });
+
         });
 
 
@@ -206,7 +218,6 @@ function online() {
         //BOTONES GUARDAR//
         ///////////////////
 
-        /*
         $('input[type=file]').on('change', prepareUpload);
 
         $("#btnGuardarArchivo").on("click",function(event){
@@ -235,11 +246,9 @@ function online() {
                     success: function(oJson)
                     {
                         if (oJson.br) {
-
                             $(sIdFrm).each(function () {
                                 this.reset();
                             });
-
                             $("#pEquinoEstudioArchivoAjxResp").text(oJson.sr).css("color", "#000000").fadeOut(1000).fadeIn(500).fadeOut(5000);
 
                             cargarListadoEstudiosPendientes(function(){
@@ -264,7 +273,6 @@ function online() {
             }
 
         });
-        **/
 
         $("#mod_btnGuardarCliente").on("click", function () {
             var sIdFrm = "#frmModifiCliente";
@@ -605,38 +613,6 @@ function online() {
 
         });
 
-
-        $('#btnGuardarArchivo').click(function(){
-
-            var sDoctorNombre = $('#estarch_doctor_nombre').val();
-
-            if(empty(sDoctorNombre)){
-                $("#pEquinoEstudioArchivoAjxResp").text("Debe completar el nombre del doctor").css("color", "#cc0000").fadeOut(1000).fadeIn(500).fadeOut(5000);
-            }else{
-
-                navigator.camera.getPicture(
-                    function(imageURI){
-
-                        var params = {};
-                        params.doctor_nombre = $('#estarch_doctor_nombre').val();
-                        params.obs = $('#estarch_obs').val();
-                        params.id_estudio = $('#inpt-hide-id_estudio').val();
-
-                        uploadPhoto(imageURI,params);
-
-                    },
-                    function(message) { alert('get picture failed'); },
-                    {
-                        quality         : 50,
-                        destinationType : navigator.camera.DestinationType.FILE_URI,
-                        sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
-                    }
-                );
-
-            }
-
-        });
-
         ///////////////////
         //BOTONES EDITAR///
         ///////////////////
@@ -769,7 +745,7 @@ function online() {
             var sIdFrm = "#frmLogIn";
             var sDatosFrm = $(sIdFrm).serialize();
 
-            $("#pLoginAjxResp").text(sLeyendaLogin);
+
 
             $.ajax({
                 type: "POST",
@@ -786,9 +762,6 @@ function online() {
                         $(sIdFrm).each(function () {
                             this.reset();
                         });
-
-                        $("#pLoginAjxResp").html('');
-
                         $(":mobile-pagecontainer").pagecontainer("change", "#home", {
                             allowSamePageTransition: true
                         });
@@ -844,6 +817,11 @@ function verEquino(idEquino,cb)
         ie: idEquino,
         lp: true
     });
+
+    $("#div-equinodata-ajax-loading").show();
+    $("#tableEquinoDataTbody").html('');
+    $("#tableEquinoProbTbody").html('');
+
     $.ajax({
         type: "POST",
         url: sHost + "ajx.info.equino.php",
@@ -867,6 +845,8 @@ function verEquino(idEquino,cb)
         $("#divListEvol").html("");
 
         if(!empty(cb)){ cb(); }
+
+        $("#div-equinodata-ajax-loading").hide();
 
     });
 }

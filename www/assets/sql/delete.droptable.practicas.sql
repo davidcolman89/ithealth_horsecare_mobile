@@ -1,1 +1,1 @@
-DROP TABLE practicas
+DROP TABLE IF EXISTS practicas

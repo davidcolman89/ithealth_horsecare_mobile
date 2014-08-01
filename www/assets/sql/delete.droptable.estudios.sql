@@ -1,1 +1,1 @@
-DROP TABLE estudios
+DROP TABLE IF EXISTS estudios

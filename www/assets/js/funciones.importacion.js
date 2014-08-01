@@ -26,7 +26,7 @@ function importarInfoServer(cb) {
                         db.transaction(function (tx) {
                             tx.executeSql(aux, [v.id, v.nombre, v.id_lugar, v.offline, '']);
                         }, dbError, function(){
-                            dbExitoImportacion('cliente insertado: ' + v.nombre + ' id: ' + v.id);
+                            dbExitoImportacion('Insertando Cliente: ' + v.nombre + ' id: ' + v.id);
                         });
                     });
 
@@ -60,7 +60,7 @@ function importarInfoServer(cb) {
                                 ''
                             ]);
                         }, dbError, function(){
-                            dbExitoImportacion('equino insertado: ' + v.nombre + ' id: ' + v.id);
+                            dbExitoImportacion('Insertando Equino: ' + v.nombre + ' id: ' + v.id);
                         });
                     });
 
@@ -112,14 +112,6 @@ function importarInfoServer(cb) {
         alert(oError.e1);
     }).done(function () {
         //en caso de exito
-        $("#div-export-online-msj")
-            .text("Se han importado los datos del servidor.")
-            .css("color", "#008CBA")
-            .fadeOut(500)
-            .fadeIn(500)
-            .fadeOut(500)
-            .fadeIn(500)
-            .fadeOut(500);
 
         if(!empty(cb)){
             cb();

@@ -1,1 +1,1 @@
-DROP TABLE evoluciones
+DROP TABLE  IF EXISTS evoluciones

@@ -1,1 +1,1 @@
-DROP TABLE equinos
+DROP TABLE IF EXISTS equinos

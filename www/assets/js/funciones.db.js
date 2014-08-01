@@ -169,6 +169,15 @@ function dbExito() {
 
 function dbExitoImportacion(txt) {
     console.log(txt);
+    $("#div-export-online-msj")
+        .show()
+        .text(txt)
+        .css("color", "#008CBA")
+        .fadeOut(1)
+        .fadeIn(1)
+        .fadeOut(1)
+        .fadeIn(1)
+        .fadeOut(1);
 }
 
 

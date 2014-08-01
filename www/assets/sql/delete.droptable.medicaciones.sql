@@ -1,1 +1,1 @@
-DROP TABLE medicaciones
+DROP TABLE IF EXISTS medicaciones
