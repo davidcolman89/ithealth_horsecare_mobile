@@ -191,8 +191,7 @@ function armarTrEvoluciones(aEvolucion) {
 
         var bObs = (json.evol_obs != "") ? true : false;
         var sObs = (bObs) ? ((['<br>', '"', json.evol_obs, '"']).join("")) : '';
-        //var sClassInfoEquino = (['id_estado_', json.evol_id_estado]).join("");
-        var sClassInfoEstudio = (['estudio_activo_', json.evol_estudio_activo]).join("");
+
         var infoEquino, infoEstudio, infoMedicacion, infoPractica, infoEvolucion;
         var estudios = json.estudios;
         var medicaciones = json.medicaciones;
@@ -217,6 +216,7 @@ function armarTrEvoluciones(aEvolucion) {
                 if(!empty(estudio.archivos))
                 {
 
+                    var sClassInfoEstudio = (['estudio_activo_', estudio.activo]).join("");
                     var archivos = estudio.archivos;
                     var srcImgEstudio = '';
                     var sClassVerImgEstudio = '';
@@ -227,11 +227,14 @@ function armarTrEvoluciones(aEvolucion) {
 
                     $.each(archivos,function(k,archivo){
 
-                        srcImgEstudio = sPathImage + archivo.nombre;
-                        sClassVerImgEstudio = 'btn-ver-img-estudio ';
-                        dataSrc = ' data-src="' + srcImgEstudio + '"';
-                        dataEstudioDoctorNombre = ' data-doctor-nombre="' + estudio.doctor + '"';
-                        dataEstudioObs = ' data-obs="' + estudio.observacion + '"';
+                        if(!empty(archivo.nombre))
+                        {
+                            srcImgEstudio = sPathImage + archivo.nombre;
+                            sClassVerImgEstudio = 'btn-ver-img-estudio ';
+                            dataSrc = ' data-src="' + srcImgEstudio + '"';
+                            dataEstudioDoctorNombre = ' data-doctor-nombre="' + estudio.doctor + '"';
+                            dataEstudioObs = ' data-obs="' + estudio.observacion + '"';
+                        }
 
                         infoArchivo+= ([
                             '<a href="#" ' ,
