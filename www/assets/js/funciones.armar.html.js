@@ -189,10 +189,15 @@ function armarTrEvoluciones(aEvolucion) {
 
     $.each(aEvolucion, function (fila, json) {
 
-        var bObs = (json.evol_obs != "") ? true : false;
+        var bObs = (!empty(json.evol_obs)) ? true : false;
         var sObs = (bObs) ? ((['<br>', '"', json.evol_obs, '"']).join("")) : '';
 
-        var infoEquino, infoEstudio, infoMedicacion, infoPractica, infoEvolucion;
+        var infoEquino;
+        var infoEstudio = '';
+        var infoMedicacion = '';
+        var infoPractica = '';
+        var infoEvolucion;
+
         var estudios = json.estudios;
         var medicaciones = json.medicaciones;
         var practicas = json.practicas;
