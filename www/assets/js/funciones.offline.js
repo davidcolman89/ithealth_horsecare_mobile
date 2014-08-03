@@ -38,9 +38,9 @@ function armarTrProbOffline(json) {
     {
         aNuevaEvol = ([
             '<a',
-            ' class="a-nueva-evol aLink"',
+            ' class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all a-nueva-evol aLink"',
                 ' data-ip="' + json.id + '">',
-            'nueva evolucion',
+            '',
             '</a>'
         ]).join("");
     }else{
@@ -49,9 +49,9 @@ function armarTrProbOffline(json) {
 
     aListEvol = ([
         '<a',
-        ' class="a-list-evol aLink"',
+        ' class="ui-btn ui-icon-grid ui-btn-icon-notext ui-corner-all a-list-evol aLink"',
         ' data-ip="' + json.id + '">',
-        'listar evoluciones',
+        '',
         '</a>'
     ]).join("");
 

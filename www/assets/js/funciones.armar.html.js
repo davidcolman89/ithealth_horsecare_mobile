@@ -241,7 +241,7 @@ function armarTrEvoluciones(aEvolucion) {
                                 ' class="' + sClassVerImgEstudio + sClassInfoEstudio + '" ',
                             '> ',
                             estudio.descripcion,
-                            '</a>',
+                            '</a>'
                         ]).join("");
 
                     });
@@ -340,14 +340,14 @@ function armarImgEstudio(idDiv,nombreArchivo){
         '<img',
         ' src="' + src + '"',
         ' alt=""',
-        ' >',
+        ' >'
     ]).join("");
 
     div = ([
         '<div data-role="popup" id="' + idDiv + '" style="display:none;">',
         '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
         img,
-        '</div>',
+        '</div>'
     ]).join("");
 
 
