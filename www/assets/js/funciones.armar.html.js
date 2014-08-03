@@ -248,7 +248,7 @@ function armarTrEvoluciones(aEvolucion) {
                             dataEstudioObs,
                                 ' class="' + sClassVerImgEstudio + sClassInfoEstudio + '" ',
                             '> ',
-                            estudio.descripcion,
+                            'archivo',
                             '</a>'
                         ]).join("");
 
@@ -260,6 +260,7 @@ function armarTrEvoluciones(aEvolucion) {
                 infoEstudio+= ([
                     '<br>',
                     '<b>Est.</b> ',
+                    estudio.descripcion,
                     infoArchivo
                 ]).join("");
 
