@@ -217,7 +217,7 @@ function online() {
         ///////////////////
         //BOTONES GUARDAR//
         ///////////////////
-
+        /*
         $('input[type=file]').on('change', prepareUpload);
 
         $("#btnGuardarArchivo").on("click",function(event){
@@ -273,6 +273,7 @@ function online() {
             }
 
         });
+        */
 
         $("#mod_btnGuardarCliente").on("click", function () {
             var sIdFrm = "#frmModifiCliente";
@@ -613,6 +614,39 @@ function online() {
 
         });
 
+        //Upload para Mobile
+        $('#btnGuardarArchivo').click(function(){
+
+            var sDoctorNombre = $('#estarch_doctor_nombre').val();
+
+            if(empty(sDoctorNombre)){
+                $("#pEquinoEstudioArchivoAjxResp").text("Debe completar el nombre del doctor").css("color", "#cc0000").fadeOut(1000).fadeIn(500).fadeOut(5000);
+            }else{
+
+                navigator.camera.getPicture(
+                    function(imageURI){
+
+                        var params = {};
+                        params.doctor_nombre = $('#estarch_doctor_nombre').val();
+                        params.obs = $('#estarch_obs').val();
+                        params.id_estudio = $('#inpt-hide-id_estudio').val();
+
+                        uploadPhoto(imageURI,params);
+
+                    },
+                    function(message) { alert('get picture failed'); },
+                    {
+                        quality         : 50,
+                        destinationType : navigator.camera.DestinationType.FILE_URI,
+                        sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
+                    }
+                );
+
+            }
+
+        });
+
+
         ///////////////////
         //BOTONES EDITAR///
         ///////////////////
@@ -745,7 +779,7 @@ function online() {
             var sIdFrm = "#frmLogIn";
             var sDatosFrm = $(sIdFrm).serialize();
 
-
+            $("#pLoginAjxResp").text(sLeyendaLogin);
 
             $.ajax({
                 type: "POST",
@@ -762,6 +796,9 @@ function online() {
                         $(sIdFrm).each(function () {
                             this.reset();
                         });
+
+                        $("#pLoginAjxResp").html('');
+
                         $(":mobile-pagecontainer").pagecontainer("change", "#home", {
                             allowSamePageTransition: true
                         });

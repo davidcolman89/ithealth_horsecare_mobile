@@ -4,10 +4,7 @@
     <title>Horse Care</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!--
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    -->
-    <!--<link rel="stylesheet" href="assets/css/min/normalize.min.css"/>-->
     <link rel="stylesheet" href="assets/css/min/jquery.mobile-1.4.0.min.css"/>
     <link rel="stylesheet" href="assets/css/index.css"/>
 </head>
@@ -23,7 +20,7 @@
         <h1>Horse - Care - LogIn</h1>
     </div>
     <div data-role="content">
-        <form id="frmLogIn">
+        <form id="frmLogIn" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="u">Usuario:</label>
                 <input type="text" name="u" id="u" value="" autofocus/>
@@ -305,46 +302,6 @@
             </thead>
             <tbody id="tbody-estudios-tot"></tbody>
         </table>
-
-        <!--<form onsubmit="return false;">-->
-        <!--<input id="filterTable-input-prob" data-type="search">-->
-        <!--</form>-->
-        <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
-        <!--data-input="#filterTable-input-prob">-->
-        <!--<thead>-->
-        <!--<tr class="ui-bar-a">-->
-        <!--<th colspan="3">Problemas</th>-->
-        <!--</tr>-->
-        <!--<tr class="ui-bar-a">-->
-        <!--<th>equino</th>-->
-        <!--<th>tipo estudio</th>-->
-        <!--<th></th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody id="tbody-estudios-problemas"></tbody>-->
-        <!--</table>-->
-        <!--<hr>-->
-        <!--<form onsubmit="return false;">-->
-        <!--<input id="filterTable-input-evol" data-type="search">-->
-        <!--</form>-->
-        <!--<table data-role="table" data-mode="" class="ui-body-a ui-shadow table-stripe ui-responsive" data-filter="true"-->
-        <!--data-input="#filterTable-input-evol">-->
-        <!--<thead>-->
-        <!--<tr class="ui-bar-a">-->
-        <!--<th colspan="3">Evoluciones</th>-->
-        <!--</tr>-->
-        <!--<tr class="ui-bar-a">-->
-        <!--<th>equino</th>-->
-        <!--<th>tipo estudio</th>-->
-        <!--<th></th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody id="tbody-estudios-evoluciones">-->
-        <!--</tbody>-->
-        <!--</table>-->
-        <!--<hr>-->
-
-
         <div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false"
              data-tolerance="30,15">
             <a href="#" data-rel="back"
@@ -368,7 +325,7 @@
     </div>
     <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmAltaCliente">
+        <form id="frmAltaCliente" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="alt_cli_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="alt_cli_nombre" value=""/>
@@ -423,7 +380,7 @@
     </div>
     <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmAltaEquino">
+        <form id="frmAltaEquino" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="alt_eq_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="alt_eq_nombre" value=""/>
@@ -473,7 +430,7 @@
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmAltaGenetica">
+        <form id="frmAltaGenetica" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="gen_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="gen_nombre" value=""/>
@@ -500,7 +457,7 @@
 
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmAltaEquinoProblema">
+        <form id="frmAltaEquinoProblema" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="prob_fecha">Fecha:</label>
                 <input type="date" name="fecha" id="prob_fecha">
@@ -552,7 +509,7 @@
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmAltProbEvol">
+        <form id="frmAltProbEvol" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="evol_fecha">Fecha:</label>
                 <input type="date" name="fecha" id="evol_fecha">
@@ -603,7 +560,7 @@
     <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
 
     <div data-role="content">
-        <form id="frmAltaEstudioArchivo">
+        <form id="frmAltaEstudioArchivo" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="estarch_equino">Equino:</label>
                 <p id="estarch_equino"></p>
@@ -641,7 +598,7 @@
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmModifiCliente">
+        <form id="frmModifiCliente" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="mod_cli_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="mod_cli_nombre" value=""/>
@@ -696,7 +653,7 @@
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frmModifiEquino">
+        <form id="frmModifiEquino" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="mod_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="mod_nombre" value=""/>
@@ -761,7 +718,7 @@
 
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frm-alta-cli-offline">
+        <form id="frm-alta-cli-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="alt_cli_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="alt_cli_nombre-offline" value=""/>
@@ -788,7 +745,7 @@
 
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frm-alta-eq-offline">
+        <form id="frm-alta-eq-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="alt_eq_nombre">Nombre:</label>
                 <input type="text" name="nombre" id="alt_eq_nombre-offline" value=""/>
@@ -881,7 +838,7 @@
         <a href="#" data-icon="delete" class="btnLogout ui-btn-right ui-btn-icon-right" role="button">Logout</a>
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frm-alta-prob-offline">
+        <form id="frm-alta-prob-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="prob_fecha-offline">Fecha:</label>
                 <input type="date" name="fecha" id="prob_fecha-offline">
@@ -933,7 +890,7 @@
 
     </div><a href="#home" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">Home</a><hr class="dc-hr">
     <div data-role="content">
-        <form id="frm-evol-alta-offline">
+        <form id="frm-evol-alta-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="evol_fecha">Fecha:</label>
                 <input type="date" name="fecha" id="evol_fecha-offline">

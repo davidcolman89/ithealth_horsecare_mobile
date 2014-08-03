@@ -13,7 +13,7 @@ function setearFechaActual() {
             "#prob_fecha",
             "#evol_fecha",
             "#prob_fecha-offline",
-            "#evol_fecha-offline",
+            "#evol_fecha-offline"
         ]).join(",");
 
         $(aux).attr("value", obtenerFechaActual());
@@ -50,10 +50,6 @@ function enviarAPresentacion() {
 
 function onDeviceReady() {
 
-
-    var pictureSource = navigator.camera.PictureSourceType;
-    var destinationType = navigator.camera.DestinationType;
-
     var oTipoConexion = checkConnection();
 
     if (oTipoConexion.value == Connection.NONE) {
@@ -78,7 +74,6 @@ function checkConnection() {
     states[Connection.CELL_4G] = 'Cell 4G connection';
     states[Connection.CELL] = 'Cell generic connection';
     states[Connection.NONE] = 'No network connection';
-    states[networkState];
 
     oRespuesta = {
         "value": networkState,
@@ -118,7 +113,7 @@ function chequearLogInOffline(aData, sIdFrm) {
                     });
 
                 } else {
-                    var sMsg = "Datos incorrectos."
+                    var sMsg = "Datos incorrectos.";
                     ithStorage.setItem("login", 0);
                     $("#pLoginAjxResp").text(sMsg).css("color", "#cc0000").fadeOut(1000).fadeIn(500).fadeOut(5000);
                 }
