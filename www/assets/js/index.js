@@ -6,7 +6,6 @@ $(document).bind('pageinit', function () {
 
 $(function () {
 
-    setearFechaActual();
     ithStorage.setItem("login", 0);
     cargarCombosByJson();
     db = iniciarDBOffline();
@@ -44,7 +43,10 @@ $(function () {
 
         var picker = $( ".dc-datepicker", this );
 
-        picker.mobipick();
+        picker.mobipick({
+            date: obtenerFechaActual(),
+            locale:'es'
+        });
 
         picker.on( "change", function() {
             var date = $( this ).val();
@@ -52,6 +54,8 @@ $(function () {
             // formatted date
             var dateObject = $( this ).mobipick( "option", "date" );
         });
+
+
     });
 
     if (!checkSession()) {
