@@ -62,7 +62,7 @@ $(function () {
         enviarALogIn();
     }
 
-    $(document).on("pageshow", sListaPag, function (e) {
+    $(document).on("pageshow", 'div[id^="pag_"]', function (e) {
         e.preventDefault();
 
         if (!checkSession()) {

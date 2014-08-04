@@ -249,7 +249,7 @@ function armarTrEvoluciones(aEvolucion) {
                             dataEstudioObs,
                                 ' class="' + sClassVerImgEstudio + '" ',
                             '> ',
-                            'archivo >>',
+                            'archivo »',
                             '</a>'
                         ]).join("");
 
