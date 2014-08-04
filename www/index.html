@@ -395,7 +395,7 @@
             </div>
             <div data-role="fieldcontain" id="div_alt_eq_nacimiento">
                 <label for="alt_eq_nacimiento">Nacimiento:</label>
-                <input type="date" id="alt_eq_nacimiento" name="nacimiento">
+                <input type="date" id="alt_eq_nacimiento" name="nacimiento" class="dc-datepicker" >
             </div>
             <div data-role="fieldcontain" id="div_alt_eq_id_padrillo">
                 <label for="alt_eq_id_padrillo">Padrillo:</label>
@@ -460,7 +460,7 @@
         <form id="frmAltaEquinoProblema" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="prob_fecha">Fecha:</label>
-                <input type="date" name="fecha" id="prob_fecha">
+                <input type="date" name="fecha" id="prob_fecha"  class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="prob_id_lugar">Lugar:</label>
@@ -512,7 +512,7 @@
         <form id="frmAltProbEvol" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="evol_fecha">Fecha:</label>
-                <input type="date" name="fecha" id="evol_fecha">
+                <input type="date" name="fecha" id="evol_fecha"  class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="evol_id_lugar">Lugar:</label><select name="id_lugar" id="evol_id_lugar"></select>
@@ -669,7 +669,7 @@
             </div>
             <div data-role="fieldcontain">
                 <label for="mod_nacimiento">Nacimiento:</label>
-                <input type="date" id="mod_nacimiento" name="nacimiento">
+                <input type="date" id="mod_nacimiento" name="nacimiento" class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="mod_id_padrillo">Padrillo:</label><select name="id_padrillo" id="mod_id_padrillo"></select>
@@ -759,7 +759,7 @@
             </div>
             <div data-role="fieldcontain" id="div_alt_eq_nacimiento-offline">
                 <label for="alt_eq_nacimiento">Nacimiento:</label>
-                <input type="date" id="alt_eq_nacimiento-offline" name="nacimiento">
+                <input type="date" id="alt_eq_nacimiento-offline" name="nacimiento"  class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="alt_eq_obs">Observaci&oacute;n:</label>
@@ -844,7 +844,7 @@
         <form id="frm-alta-prob-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="prob_fecha-offline">Fecha:</label>
-                <input type="date" name="fecha" id="prob_fecha-offline">
+                <input type="date" name="fecha" id="prob_fecha-offline"  class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="prob_id_lugar-offline">Lugar:</label>
@@ -896,7 +896,7 @@
         <form id="frm-evol-alta-offline" onsubmit="return false;">
             <div data-role="fieldcontain">
                 <label for="evol_fecha">Fecha:</label>
-                <input type="date" name="fecha" id="evol_fecha-offline">
+                <input type="date" name="fecha" id="evol_fecha-offline"  class="dc-datepicker">
             </div>
             <div data-role="fieldcontain">
                 <label for="evol_id_lugar">Lugar:</label>
@@ -944,6 +944,13 @@
 <script src="assets/js/lib/min/md5.min.js"></script>
 <script src="assets/js/lib/min/date.min.js"></script>
 <script src="assets/js/lib/min/empty.min.js"></script>
+
+<!-- LIB  Date Picker -->
+<link rel="stylesheet" type="text/css" href="assets/plugin/mobipick/css/mobipick.css" />
+<script type="text/javascript" src="assets/plugin/mobipick/external/xdate.js"></script>
+<script type="text/javascript" src="assets/plugin/mobipick/external/xdate.i18n.js"></script>
+<script type="text/javascript" src="assets/plugin/mobipick/js/mobipick.js"></script>
+<!-- LIB  Date Picker -->
 
 <script src="assets/js/config.js"></script>
 

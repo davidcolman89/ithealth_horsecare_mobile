@@ -30,6 +30,30 @@ $(function () {
         },1);
     });
 
+    var paginasDatePicker = ([
+        '#pag_altas_equino',
+        '#pag_altas_problema',
+        '#pag_altas_evolucion',
+        '#pag_altas_equino_offline',
+        '#pag_altas_problema_offline',
+        '#pag_altas_evolucion_offline',
+        '#pag_modifi_equino',
+    ]).join(",");
+
+    $( document ).on( "pagecreate", paginasDatePicker, function() {
+
+        var picker = $( ".dc-datepicker", this );
+
+        picker.mobipick();
+
+        picker.on( "change", function() {
+            var date = $( this ).val();
+
+            // formatted date
+            var dateObject = $( this ).mobipick( "option", "date" );
+        });
+    });
+
     if (!checkSession()) {
         enviarALogIn();
     }

@@ -218,10 +218,11 @@ function armarTrEvoluciones(aEvolucion) {
 
             $.each(estudios,function(k,estudio){
 
+                var sClassInfoEstudio = (['estudio_activo_', estudio.activo]).join("");
+
                 if(!empty(estudio.archivos))
                 {
 
-                    var sClassInfoEstudio = (['estudio_activo_', estudio.activo]).join("");
                     var archivos = estudio.archivos;
                     var srcImgEstudio = '';
                     var sClassVerImgEstudio = '';
@@ -246,21 +247,24 @@ function armarTrEvoluciones(aEvolucion) {
                             dataSrc,
                             dataEstudioDoctorNombre,
                             dataEstudioObs,
-                                ' class="' + sClassVerImgEstudio + sClassInfoEstudio + '" ',
+                                ' class="' + sClassVerImgEstudio + '" ',
                             '> ',
-                            'archivo',
+                            'archivo >>',
                             '</a>'
                         ]).join("");
 
                     });
-
 
                 }
 
                 infoEstudio+= ([
                     '<br>',
                     '<b>Est.</b> ',
+                    '<span ' +
+                    ' class="' + sClassInfoEstudio  + '"' +
+                    '>',
                     estudio.descripcion,
+                    '</span>',
                     infoArchivo
                 ]).join("");
 

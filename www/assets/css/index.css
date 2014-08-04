@@ -177,13 +177,11 @@
     margin: -15% 0 0 -25%;
 }
 
-.dc-btn-logout {
+.dc-btn-logout {}
 
-}
+.dc-btn-img {}
 
-.dc-btn-img {
-
-}
+.dc-datepicker{}
 
 .ui-icon-delete:after {
     background: transparent !important;
